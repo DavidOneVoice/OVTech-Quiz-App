@@ -1,0 +1,185 @@
+/* Global styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    display: block;
+    margin: 0 auto 30px;
+    width: 120px;
+    height: 120px;
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    margin-top: -0.5em;
+    text-align: center;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+select {
+    font-size: 18px;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #fff;
+    color: #007bff;
+    border-color: #007bff;
+    border: 2px solid;
+}
+
+#exitbtn {
+    display: block;
+    width: 94%;
+    background-color: white;
+    color: #007bff;
+    padding: 12px 20px;
+    border: 2px solid;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+#exitbtn:hover{
+    background-color: #007bff;
+    color: white;
+    font-size: 22px;
+}
+
+a {
+    display: block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #007bff;
+    font-size: 18px;
+}
+
+footer {
+    background-color: #007bff;
+    padding: 20px 0;
+    text-align: center;
+    border-radius: 0 0 10px 10px;
+}
+
+.social-icons {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.social-icons li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.social-icons li:last-child {
+    margin-right: 0;
+}
+
+.social-icons a {
+    color: #fff;
+    font-size: 24px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #f0f0f0;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    select,
+    button {
+        font-size: 16px;
+    }
+
+    .logo {
+        width: 100px;
+        height: 100px;
+    }
+
+    button {
+        padding: 10px 16px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        max-width: 90%;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    select,
+    button {
+        font-size: 14px;
+    }
+
+    .logo {
+        width: 80px;
+        height: 80px;
+    }
+
+    button {
+        padding: 8px 14px;
+        font-size: 14px;
+    }
+}
