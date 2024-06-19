@@ -39,13 +39,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Retrieve the subject (category) from the URL parameters
         const subject = urlParams.get('category');
+        console.log("Retrieved subject: ", subject); // Debug statement
 
         // Retrieve the full name from localStorage
         const fullName = localStorage.getItem("fullName");
         const firstName = fullName ? fullName.split(" ")[0] : ''; // Get the first name
 
         // Customize message based on user's score
-        if (score >= 60) {
+        if (score >= 70) {
             messageElement.innerHTML = `
                 <h3 class="winnernote">Dear ${firstName},</h3>
                 <p class="winnernote">Congratulations! You have successfully completed the <b>OVTech IQ Test</b> on ${subject}. We are thrilled to inform you that you achieved an outstanding score of ${score}% on the test. Your dedication to learning and your exceptional performance are truly commendable.</p>
@@ -59,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
             `;
         } else {
             messageElement.innerHTML = `
-                <h3>Sorry ${firstName}, you did not pass the <b>OVTech IQ Test</b>.</h3>
+                <h3>Sorry ${firstName}, you did not pass the <b>OVTech IQ Test</b> on ${subject}.</h3>
                 <p>Click <a id="retakebtn" href="user.html">here</a> to retake the test or try another subject.</p>
             `;
         }
@@ -82,6 +83,7 @@ function submitName(event) {
 // Function to handle quiz start
 function startQuiz() {
     category = document.getElementById("category-select").value; // Assign value to global category variable
+    console.log("Selected category: ", category); // Debug statement
     let categoryId;
     switch (category) {
         case "Science: Mathematics":
@@ -113,7 +115,7 @@ function startQuiz() {
             break;
     }
     // Redirect to the quiz page with the selected category as a URL parameter
-    window.location.href = `quiz_questions.html?category=${categoryId}`;
+    window.location.href = `quiz_questions.html?category=${categoryId}&subject=${category}`;
 }
 
 // Function to fetch questions based on category
@@ -166,6 +168,9 @@ function displayQuestions(questions) {
     submitButton.textContent = 'Submit Quiz';
     submitButton.addEventListener('click', submitQuiz);
     questionContainer.appendChild(submitButton);
+
+    // Start the countdown timer once the questions are displayed
+    startTimer();
 }
 
 // Function to submit the quiz
@@ -181,8 +186,12 @@ function submitQuiz() {
     const totalQuestions = questions.length;
     const score = (correctAnswers / totalQuestions) * 100;
 
-    // Redirect to the score page with the score as a URL parameter
-    window.location.href = `score.html?score=${score}&category=${category}`;
+    // Retrieve the subject (category) from the URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const subject = urlParams.get('subject');
+
+    // Redirect to the score page with the score and subject as URL parameters
+    window.location.href = `score.html?score=${score}&category=${subject}`;
 }
 
 // Function to hide the loading message
@@ -191,4 +200,23 @@ function hideLoadingMessage() {
     if (loadingMessage) {
         loadingMessage.style.display = 'none';
     }
+}
+
+// Function to start the countdown timer
+function startTimer() {
+    const timerElement = document.getElementById('timer');
+    let timeRemaining = 300; // 10 minutes in seconds
+
+    const intervalId = setInterval(() => {
+        const minutes = Math.floor(timeRemaining / 60);
+        const seconds = timeRemaining % 60;
+        timerElement.textContent = `Time Remaining: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+        if (timeRemaining > 0) {
+            timeRemaining--;
+        } else {
+            clearInterval(intervalId);
+            submitQuiz(); // Automatically submit the quiz when time runs out
+        }
+    }, 1000);
 }
